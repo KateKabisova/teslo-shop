@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AlertComponent } from "../../alert/alert/alert.component";
 import { AuthService } from '@auth/services/auth.service';
 
@@ -17,6 +17,7 @@ import { AuthService } from '@auth/services/auth.service';
 export class LoginPageComponent {
 
   fb = inject(FormBuilder);
+  router= inject(Router);
 
   hasError = signal(false);
   isPosting = signal(false);
@@ -36,8 +37,12 @@ export class LoginPageComponent {
       return;
     }
 
-    this.authService.login(this.loginForm.value.email!, this.loginForm.value.password!).subscribe((resp)=>{
-      console.log(resp);
+    this.authService.login(this.loginForm.value.email!, this.loginForm.value.password!).subscribe((isValid)=>{
+      if(isValid) {
+        this.router.navigateByUrl('/');
+        return;
+      }
+      this.hasError.set(true);
     });
     console.log(this.loginForm.value);
   }
