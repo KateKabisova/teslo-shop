@@ -4,6 +4,8 @@
     <!-- Slides -->
     @for (img of images() ; track img) {
     <div class="swiper-slide"> <img class="w-full object-cover" [src]="img | productImage"></div>
+    }@empty {
+      <div class="swiper-slide"> <img class="w-full object-cover" [src]="null | productImage"></div>
     }
 
     ...

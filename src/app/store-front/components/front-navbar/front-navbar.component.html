@@ -43,16 +43,19 @@
     </ul>
   </div>
   <div class="navbar-end gp-4">
+    @if(authService.isAdmin()){
+    <a routerLink="/admin" class="btn test-accent">Admin Panel</a>
+    }
+
     @if(authService.authStatus() === 'authenticated'){
-      <button class="btn btn-ghost">{{ authService.user()?.fullName}}</button>
-      <button class="btn btn-sm btn-error"
-      (click)="authService.logout()">Salir</button>
+    <button class="btn btn-ghost">{{ authService.user()?.fullName}}</button>
+    <button class="btn btn-sm btn-error" (click)="authService.logout()">Salir</button>
     }
     @else if (authService.authStatus() === 'not-authenticated') {
-      <a  class="btn btn-secondary" routerLink="/auth/login">Login</a>
+    <a class="btn btn-secondary" routerLink="/auth/login">Login</a>
     }
     @else {
-      <a class="btn btn-ghost">...</a>
+    <a class="btn btn-ghost">...</a>
     }
 
   </div>
