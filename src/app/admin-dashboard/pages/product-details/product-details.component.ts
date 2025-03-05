@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal, untracked } from '@angular/core';
 import { Product } from '@products/interfaces/product.interface';
 import { ProductCarouselComponent } from "../../../products/components/product-carousel/product-carousel.component";
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -19,6 +19,12 @@ export class ProductDetailsComponent {
   router = inject(Router);
   fb = inject(FormBuilder);
   wasSaved = signal(false);
+  tempImages = signal<string[]>([]);
+  imageFileList: FileList | undefined = undefined;
+  imagesToCarousel = computed(() => {
+    const currentProductImg = [...this.product().images, ...this.tempImages()];
+    return currentProductImg;
+  });
 
   productsService = inject(ProductService);
   product = input.required<Product>();
@@ -32,9 +38,9 @@ export class ProductDetailsComponent {
     price: [0, [Validators.required, Validators.min(0)]],
     stock: [0, [Validators.required, Validators.min(0)]],
     sizes: [['']],
-    tags:[''],
-    images:[[]],
-    gender:['men',[Validators.required, Validators.pattern(/men|women|kid|unisex/)]],
+    tags: [''],
+    images: [[]],
+    gender: ['men', [Validators.required, Validators.pattern(/men|women|kid|unisex/)]],
 
   });
 
@@ -81,13 +87,13 @@ export class ProductDetailsComponent {
       // Crear producto
       //firstValueFrom si lo usamos no hace falta hacer la suscripción(recibe un observable y regresa una promesa)
       const product = await firstValueFrom(
-        this.productsService.createProduct(productLike)
+        this.productsService.createProduct(productLike, this.imageFileList)
       );
 
       this.router.navigate(['/admin/products', product.id]);
     } else {
       await firstValueFrom(
-        this.productsService.updateProduct(this.product().id, productLike)
+        this.productsService.updateProduct(this.product().id, productLike, this.imageFileList)
       );
     }
 
@@ -95,5 +101,14 @@ export class ProductDetailsComponent {
     setTimeout(() => {
       this.wasSaved.set(false);
     }, 3000);
+  }
+
+
+  onFilesChanged(event: Event) {
+    const filesList = (event.target as HTMLInputElement).files;
+    this.imageFileList = filesList ?? undefined;
+    this.tempImages.set([]);
+    const imageUrls = Array.from(filesList ?? []).map((file) => URL.createObjectURL(file));
+    this.tempImages.set(imageUrls);
   }
 }

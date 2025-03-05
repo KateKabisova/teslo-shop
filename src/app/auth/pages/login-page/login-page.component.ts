@@ -44,7 +44,7 @@ export class LoginPageComponent {
       }
       this.hasError.set(true);
     });
-    console.log(this.loginForm.value);
+
   }
 
 }
