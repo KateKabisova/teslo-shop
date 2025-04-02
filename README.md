@@ -1,27 +1,39 @@
 # TesloShop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.11.
 
-## Development server
+## Back
+Para que funcione el proyecto ddebemos ejecutar el proyecto de Back.El proyecto de back no esta hecho por mi pero es necesario para el Front.
+1. Clonar el proyecto : https://github.com/KateKabisova/nest-teslo-shop
+1. Lanzamos  Docker
+2. Levantar la base de datos : docker-compose up -d
+6. Levantar: npm run start:dev
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Dev
+1. Clonar el proyecto
+2. Ejecutar  ```npm install``
+3. Ejecutar la app```ng serve``  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Usuario Admin: 
+email: test1@google.com
+password: Abc123
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Tecnologías Utilizadas
+Framework y Lenguaje
+1. Angular 19
+2. TypeScript
 
-## Running unit tests
+Estilos y Diseño
+1. SCSS
+2. Tailwind CSS
+3. DaisyUI
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Routing y Navegación
+1. Angular Router
 
-## Running end-to-end tests
+Gestión de Datos y Estado
+1. RxJS
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Otros
+1. Swiper (para carruseles de imágenes)
