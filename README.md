@@ -2,7 +2,7 @@
 
 
 ## Back
-Para que funcione el proyecto ddebemos ejecutar el proyecto de Back.El proyecto de back no esta hecho por mi pero es necesario para el Front.
+Para que funcione el proyecto debemos ejecutar el proyecto de Back. El proyecto de Back no esta hecho por mi pero es necesario para el Front.
 1. Clonar el proyecto : https://github.com/KateKabisova/nest-teslo-shop
 1. Lanzamos  Docker
 2. Levantar la base de datos : docker-compose up -d
